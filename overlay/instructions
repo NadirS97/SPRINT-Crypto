@@ -1,0 +1,81 @@
+%h              🍰 Bienvenue dans le sujet du SPRINT ! 🍰
+
+
+Bienvenue dans AMC, l'environnement de travail du SPRINT 2021. Avant de
+vous lancer dans la résolution des exercices, prenez le temps de prendre
+en main cet environnement et de lire les instructions qui suivent.
+
+Votre nom de code pour cette épreuve est Ninette, c'est sous ce nom
+que nous contacterons votre groupe et que vous pouvez vous identifier
+auprès de vos enseignants.
+
+
+%h1. Déroulement de l'épreuve
+
+Au fur et à mesure de la résolution des exercices, vous découvrirez des
+tokens sous la forme de chaines composées de 24 lettres majuscules.  Ces
+tokens sont la preuve que vous avez résolu l'exercice. Ils sont à
+déposer %!dès que vous les trouvez%n sur le site web de validation des
+tokens (suivez ce lien, attention ce lien est privé et ne doit pas être
+partagé avec les autres groupes) :
+<https://pdicost.univ-orleans.fr/crypto/7c677081b7ef47a54184f9c88cf64bbb/ninette/>
+
+En plus du dépôt de tokens, il vous est demandé de tenir un journal de
+votre SPRINT selon les modalités décrites dans le sujet. Il s'agit de
+décrire dans un fichier avec dates et heures les avancées effectuées par
+votre groupe ainsi que la liste exhaustive des tokens découverts.
+
+Un modèle de journal est disponible dans le répertoire overlay. Vous
+pouvez %l/journal:consulter votre journal%n en suivant le lien.
+
+Enfin, l'ensemble des codes sources utilisés pour résoudre les exercices
+est à déposer lui aussi dans le dépôt git.
+
+La collaboration entre groupes n'est pas interdite si elle est
+documentée. Réfléchissez tout de même avant de trop collaborer car
+les tokens les plus rares seront les mieux notés.
+
+La ligne rouge à ne pas franchir : %!il est strictement interdit 
+%!de faire faire son travail par quelqu'un d'autre !
+%bOn ne recopie donc pas de code sans comprendre, on ne dépose pas son
+%bexercice sur un forum pour obtenir une solution toute faite, etc
+
+
+%h2. Logiciel
+
+Pour travailler sur ce SPRINT vous avez essentiellement besoin d'une
+version suffisamment récente de Python 3.
+
+%!Si vous n'avez pas encore installé pycryptodome, faites-le. Cet outil
+%!n'en sera que plus rapide !
+
+Si tout s'est bien passé, au premier lancement du programme %brunme.pyz%n, 
+les actions suivantes se sont déroulées successivement : 
+    1. un fichier de configuration %bamc.ini%t a été généré ; 
+    2. des répertoire %boverlay/%t et %bfilters/%t ont été peuplés de 
+       leurs premiers fichiers ;
+    3. un serveur web a été lancé ;
+    4. un navigateur web s'est connecté à ce serveur, dans lequel vous
+       lisez en ce moment ceci.
+
+Pour aller plus loin, vous pouvez :
+  - consulter la %lhelp/help:documentation d'AMC%t ;
+  - suivre le %lhelp/tuto:didacticiel des filtres%t.
+
+
+%h3. En route !
+
+Une fois ces instructions bien lues, nous vous conseillons de récupérer
+le contenu du fichier %l/data/instructions:instructions%n pour le placer dans votre répertoire 
+%boverlay/%n et de le modifier à votre guise pour en faire un point d'entrée
+vers les différents exercices.
+
+Pour l'instant vous avez accès à la première partie du sujet :
+
+-=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=-
+
+%i/goto/classico
+-=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=--=-
+
+
+Si vous êtes complétement perdus, il reste <http://www.perdu.com> !

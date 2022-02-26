@@ -1,0 +1,127 @@
+%h === Journal de bord du capitaine ===
+
+%bJeudi 8h15.%t Premier lancement du script %brunme.pyz%t, mes neurones
+commencent à faire des bulles. Vite ! Tous à la batmobile !
+
+%bJeudi 8h30.%t Premier token découvert dans le mail de M. Ollinger.
+1. NPNRNMDMRTIRSNMPOOMNAEAT
+
+%bJeudi 8h48.%t Deuxième token trouvé dans la documentation fournie, lors d'un essai d'accès à une url erronée.
+2. NMNUNRTLRERDPPSNGBRULOAC
+
+%bJeudi 11h20.%t Nous avons compris le fonctionnement des filtres, ainsi que leur utilisations (raseac fonctionnel sur bateau),
+nous avons également écrit le script (le filtre mel) qui nous a permis de décoder le messageAlice.
+http://localhost:6473/5fcd258b5545a7161631905744ca8706/classico/messagealice?mel
+
+%bJeudi 11h21.%t Une fois le décallage appliqué sur le message, nous avons pu récuperer la pièce jointe du mail contenant une
+image .png (plan de tram) en utilisant le script (decryptPJ.py).
+
+%bJeudi 12h28.%t En accédant au Parcfloral>batimentIIA>les salles des TD, nous avons changé l'url de la salleE12 en salleE09
+(grâce au message d'Alice).
+3. NRSESULBAGNNMUBIGTSUILLO
+
+%bJeudi 13h39.%t En appliquant un décryptage de la photo (affichée dans l'amphi 1), nous avons décomposé la photo en plusieurs
+mask (X, Y, Z, YXZ).png -> Y.png nous permettant de lire un token.
+4. RSRNNRICIUTCACRSOABMGSRB
+
+%bJeudi 14h50.%t Nous avons exécuté notre script qui se trouve dans /FruitsEtLegumes/decryptFL.py prenant le
+le texte chiffré en paramètre et en décodant symbole par symbole (en sachant que ce qu'il y'a entre les
+tirets est en anglais...), cela nous a permis de récupérer un token.
+5. NRNPNBLNELPBLTTLSSRRCSAO
+
+%bJeudi 16h10.%t Récupération du token en utilisant la bibliothèque des codes couleurs trouvés précédemment,
+nous avons mis en place un algorithme respectant les couleurs qui donne la lettre correspondante en
+vérifiant toutes les conditions possibles.
+6. NINVNMEMNMMAEPEDRASOBMVE
+
+
+%bJeudi 18h19.%t Récupération du token depuis le dossier racine /crypto/ sur la page html tba.html en
+lisant le code source de la page.
+https://pdicost.univ-orleans.fr/crypto/tba.html
+view-source:https://pdicost.univ-orleans.fr/crypto/tba.html
+Ou via: (redirection automatique vers tba.html)
+https://pdicost.univ-orleans.fr/crypto/7c677081b7ef47a54184f9c88cf64bbb/
+7. RNNINAEGCMDNLBPUCSPSBUCG
+
+%bJeudi 22h22.%t Ouverture des images avec un bloc note, je trouve un texte après le mot Cake que je
+fais decoder en base64, on trouve le lien pour avoir le mot de passe de l'archive 7z.7z que j'ai eu,
+en transformant une image en une archive on obtient la suite et un token en passant :D
+Url MDP: https://pdicost.univ-orleans.fr/cryptodm/micpass.php?user=Ninette&login=7z&apikey=d6e42c712b4ecaec01fcaa6cce9ae1a6
+8. RESOODGUAOPMMUIPSCPGPELC
+
+%bVendredi 9h05.%t Neuvième Token trouvé dans le mail de M.Ollinger, en décodant le code en base64.
+9. NDSESIBMEAITUGRDOASPLTML
+
+%bVendredi 9h50.%t Ouverture du fichier Wireshark avec wireshark On suite la conversation TCP et
+on trouve un message code en base16 qu'on decode en ASCII parmi ce message ce trouve le token suivant:
+10. NGRRNMNPUBABGPSURLPGNLDE
+
+%bVendredi 10h27.%t 11ème token offert par M. Ollinger.
+11. RSNANMRBCILOPBGEUOATNREM
+
+%bVendred 10h47.%t: En exportant le contenu du chunck de l'image tram.png, puis en le décodant en base64
+12. RNRINPMDPNOESMSREMEPCGBG
+
+%bVendredi 10H49.%t Ouvertue en utilisant un bloc note du gif (houston.png) recupérer dans le mail
+13. RRRERSNAUOLTGIEODLSOECTL
+
+%bVendredi 10H49.%t Grace aux messages decrypter precedemment on a a pu rajouter deux ESP pour pouvoir
+continuer, celle-ci nous à donner un texte sous format mail, on a donc copier ce texte dans un bloc note
+et ensuite on a changé l'extension en un .eml. Ca nous à donner l'accés.
+Un mail avec une image en piéce jointe allgame.png
+14. RENBREPLSGLDRRSIDASREOBU
+
+%bVendredi 12H36.%t Grace à l'image allgame.png retrouver precedemment nous avon pu trouver le message
+suivant: b'Cette image est aussi un fichier AMC ! Vous pouvez le lancer avec $ ./runme.pyz -o allgame.png
+serve data/elgamal.html\n' En lancant cette commande nous tombons sur un jeu 2D dans ce jeu j'ai rencontré
+DAVE qui m'a donné le token suivant:
+15. NNNARTCGLDCDNCMSMMDPDMAM
+
+%bVendredi 13H46.%t Fait sur feuille, à la main, en s'aidant de la citation d'Alphonse DAUDET:
+"C'est une petite chambre au cinquième, une de ces mansardes où la pluie tombe droite sur les vitres à tabatière,
+ et qui - la nuit venue, comme maintenant - semblent se perdre avec les toits, dans le noir et dans la rafale."
+correspondant au début du message chiffré: on a pu déduire un chiffre de la clé (6): car 69 correspondant
+au "SHIFT" on a pu en déduire que le 68 correspond à l'espace, ayant maintenant l'ensemble des espace entre
+les mots, on a analysé le message codé et on a pu découvrir le positionnement du token à décrypter, d'autant plus
+qu'on sait que le token est une suite de lettres en MAJ (précédé du SHIFT "69") :
+"6946694169466961696069466936936906996962694669466906906962694869616948694769616996976961"
+En utilisant cette suite de chiffre on en déduit que le deuxième chiffre de la clé (qui correspond au premier) (4)
+: car on tombe sur des combinaisons entre deux 69:"46" on comprend que la code 46 correspond à une lettre donc:
+les deux chiffres de notre clé sont: 4/6.
+Une fois ceci trouvé on repris le message depuis le début en décodant en utilsant la citation d'Alphonse:
+Par exemple: 698696947961168 : "SHIFT"+8+"SHIFT"+"SHIFT"+47+9+61+1+"ESPACE" = "C'est " ... ainsi de suite
+Voir GrilleChiffrement.pdf
+16. NGNSRNIIAEUNNAAUPSPOSEBS
+
+%bVendredi 15H15.%t Aprés avoir ouvert l'image avec un bloc note on a pu recuperer un message (contenu d'un chunk
+de type caKe) ecrit en hexadecimal, qu'on a du décoder celui-ci en ASCII pour avoir le message suivant:
+"Si cette musique ne vous plaÃ®t pas, il faut peut-Ãªtre aller voir du cÃ´tÃ© des bits de poids faible
+ pour trouver 3 masques et 3 nouveaux QR-codes !"
+Comme on nous demande d'aller chercher les bits de poids faible afin d'effectuer un XOR entre ecran + les masques:
+Une fois qu'on a effectuer un xor de /Ecran/ecran.png et /Ecran/X.png on a pu avoir accés à un nouveau QR-code
+qui nous a permis d'avoir le token.
+17. NMRSNIAOIARENSTOOPDTAPNG
+
+%bVendredi 17H26.%t Question 2: /Nombre-Audio/docAudio/Audios1/decryptAudio1.py en donnant otp comme masque et
+en effectuant la retranscription de l'audio on a pu recuperer une serie de chiffre
+"69466941694669769606946697691696169606961698694669616946695694569626986996945695699695"
+En utilisant la grille de dechiffrage de la question 1 On a pu décoder le token
+18. NGNBRNBTSRSCNSNDLUCELDED
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

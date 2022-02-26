@@ -1,0 +1,13 @@
+#!/usr/bin/env python3
+from filter import *
+
+log(f"Démarrage. Invoqué depuis { url }")
+
+alpha = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+phaal = alpha[17:] + alpha[:17]
+alpha += alpha.lower()
+phaal += phaal.lower()
+cesar = str.maketrans(alpha, phaal)
+for line in input:
+    output.write(line.translate(cesar))
+log(f"Fin du traitement.")

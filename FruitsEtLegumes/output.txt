@@ -1,0 +1,203 @@
+
+le format png est tres facile a manipuler. il suffit de lire la rfc 2083
+pour s'en convaincre : 
+
+=======
+3. file structure
+   
+   a png file consists of a png signature followed by a series of
+   chunks.  this chapter defines the signature and the basic properties
+   of chunks.  individual chunk types are discussed in the next chapter.
+   
+   3.1. png file signature
+      
+      the first eight bytes of a png file always contain the following
+      (decimal) values:
+         
+         137 80 78 71 13 10 26 10
+      
+      this signature indicates that the remainder of the file contains a
+      single png image, consisting of a series of chunks beginning with
+      an ihdr chunk and ending with an iend chunk.
+      
+      see rationale: png file signature (section 12.11).
+   
+   3.2. chunk layout
+      
+      each chunk consists of four parts:
+      
+      length
+         a 4-byte unsigned integer giving the number of bytes in the
+         chunk's data field. the length counts only the data field, not
+         itself, the chunk type code, or the crc.  zero is a valid
+         length.  although encoders and decoders should treat the length
+         as unsigned, its value must not exceed (2^31)-1 bytes.
+      
+      chunk type
+         a 4-byte chunk type code.  for convenience in description and
+         in examining png files, type codes are restricted to consist of
+         uppercase and lowercase ascii letters (a-z and a-z, or 65-90
+         and 97-122 decimal).  however, encoders and decoders must treat
+         the codes as fixed binary values, not character strings.  for
+         example, it would not be correct to represent the type code
+         idat by the ebcdic equivalents of those letters.  additional
+         naming conventions for chunk types are discussed in the next
+         section.
+      
+      chunk data
+         the data bytes appropriate to the chunk type, if any.  this
+         field can be of zero length.
+      
+      crc
+         a 4-byte crc (cyclic redundancy check) calculated on the
+         preceding bytes in the chunk, including the chunk type code and
+         chunk data fields, but not including the length field. the crc
+         is always present, even for chunks containing no data.  see crc
+         algorithm (section 3.4).
+      
+      the chunk data length can be any number of bytes up to the
+      maximum; therefore, implementors cannot assume that chunks are
+      aligned on any boundaries larger than bytes.
+      
+      chunks can appear in any order, subject to the restrictions placed
+      on each chunk type.  (one notable restriction is that ihdr must
+      appear first and iend must appear last; thus the iend chunk serves
+      as an end-of-file marker.)  multiple chunks of the same type can
+      appear, but only if specifically permitted for that type.
+   
+   3.3. chunk naming conventions
+      
+      chunk type codes are assigned so that a decoder can determine some
+      properties of a chunk even when it does not recognize the type
+      code.  these rules are intended to allow safe, flexible extension
+      of the png format, by allowing a decoder to decide what to do when
+      it encounters an unknown chunk.  the naming rules are not normally
+      of interest when the decoder does recognize the chunk's type.
+      
+      four bits of the type code, namely bit 5 (value 32) of each byte,
+      are used to convey chunk properties.  this choice means that a
+      human can read off the assigned properties according to whether
+      each letter of the type code is uppercase (bit 5 is 0) or
+      lowercase (bit 5 is 1).  however, decoders should test the
+      properties of an unknown chunk by numerically testing the
+      specified bits; testing whether a character is uppercase or
+      lowercase is inefficient, and even incorrect if a locale-specific
+      case definition is used.
+      
+      it is worth noting that the property bits are an inherent part of
+      the chunk name, and hence are fixed for any chunk type.  thus,
+      text and text would be unrelated chunk type codes, not the same
+      chunk with different properties.  decoders must recognize type
+      codes by a simple four-byte literal comparison; it is incorrect to
+      perform case conversion on type codes.
+      
+      the semantics of the property bits are:
+      
+      ancillary bit: bit 5 of first byte
+         0 (uppercase) = critical, 1 (lowercase) = ancillary.
+         
+         chunks that are not strictly necessary in order to meaningfully
+         display the contents of the file are known as "ancillary"
+         chunks.  a decoder encountering an unknown chunk in which the
+         ancillary bit is 1 can safely ignore the chunk and proceed to
+         display the image. the time chunk (time) is an example of an
+         ancillary chunk.
+         
+         chunks that are necessary for successful display of the file's
+         contents are called "critical" chunks. a decoder encountering
+         an unknown chunk in which the ancillary bit is 0 must indicate
+         to the user that the image contains information it cannot
+         safely interpret.  the image header chunk (ihdr) is an example
+         of a critical chunk.
+      
+      private bit: bit 5 of second byte
+         0 (uppercase) = public, 1 (lowercase) = private.
+         
+         a public chunk is one that is part of the png specification or
+         is registered in the list of png special-purpose public chunk
+         types.  applications can also define private (unregistered)
+         chunks for their own purposes.  the names of private chunks
+         must have a lowercase second letter, while public chunks will
+         always be assigned names with uppercase second letters.  note
+         that decoders do not need to test the private-chunk property
+         bit, since it has no functional significance; it is simply an
+         administrative convenience to ensure that public and private
+         chunk names will not conflict.  see additional chunk types
+         (section 4.4) and recommendations for encoders: use of private
+         chunks (section 9.8).
+      
+      reserved bit: bit 5 of third byte
+         must be 0 (uppercase) in files conforming to this version of
+         png.
+         
+         the significance of the case of the third letter of the chunk
+         name is reserved for possible future expansion.  at the present
+         time all chunk names must have uppercase third letters.
+         (decoders should not complain about a lowercase third letter,
+         however, as some future version of the png specification could
+         define a meaning for this bit.  it is sufficient to treat a
+         chunk with a lowercase third letter in the same way as any
+         other unknown chunk type.)
+      
+      safe-to-copy bit: bit 5 of fourth byte
+         0 (uppercase) = unsafe to copy, 1 (lowercase) = safe to copy.
+         
+         this property bit is not of interest to pure decoders, but it
+         is needed by png editors (programs that modify png files).
+         this bit defines the proper handling of unrecognized chunks in
+         a file that is being modified.
+         
+         if a chunk's safe-to-copy bit is 1, the chunk may be copied to
+         a modified png file whether or not the software recognizes the
+         chunk type, and regardless of the extent of the file
+         modifications.
+         
+         if a chunk's safe-to-copy bit is 0, it indicates that the chunk
+         depends on the image data.  if the program has made any changes
+         to critical chunks, including addition, modification, deletion,
+         or reordering of critical chunks, then unrecognized unsafe
+         chunks must not be copied to the output png file.  (of course,
+         if the program does recognize the chunk, it can choose to
+         output an appropriately modified version.)
+         
+         a png editor is always allowed to copy all unrecognized chunks
+         if it has only added, deleted, modified, or reordered ancillary
+         chunks.  this implies that it is not permissible for ancillary
+         chunks to depend on other ancillary chunks.
+         
+         png editors that do not recognize a critical chunk must report
+         an error and refuse to process that png file at all. the
+         safe/unsafe mechanism is intended for use with ancillary
+         chunks.  the safe-to-copy bit will always be 0 for critical
+         chunks.
+         
+         rules for png editors are discussed further in chunk ordering
+         rules (chapter 7).
+      
+      for example, the hypothetical chunk type name "cake" has the
+      property bits:
+         
+         cake  <-- 32 bit chunk type code represented in text form
+         ||||
+         |||+- safe-to-copy bit is 1 (lower case letter; bit 5 is 1)
+         ||+-- reserved bit is 0     (upper case letter; bit 5 is 0)
+         |+--- private bit is 1      (lower case letter; bit 5 is 1)
+         +---- ancillary bit is 1    (lower case letter; bit 5 is 1)
+      
+      therefore, this name represents an ancillary, private, safe-to-copy
+      chunk.
+      ======================================
+      (extrait de https://tools.ietf.org/html/rfc2083)
+
+prenez ce token nrnpnblnelpblttlssrrcsao et mettez-vous au travail !
+ecrivez un programme qui parcourt un fichier png donne en parametre et
+extrait le contenu du chunk cake si celui-ci est present.
+
+n'hesitez pas a utiliser ce programme lorsque vous rencontrez des fichiers
+png dans le sprint.
+
+ps. n'oubliez pas de mettre ce programme dans vos fichiers a rendre.
+
+pps. ce fichier a perdu ses majuscules et ses minuscules, attention a
+bien lire le nom du chunk cake. celui-ci n'est *pas* entierement en
+minuscules.

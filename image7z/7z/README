@@ -1,0 +1,12 @@
+Comment sont construites ces URL ?
+
+https://pdicost.univ-orleans.fr/cryptodm/micpass.php?user=Ninette&login=7z&apikey=d6e42c712b4ecaec01fcaa6cce9ae1a6
+
+Ca vous rappelle sans doute micmac ? En effet, c'est la
+même idée, sauf qu'ici l'apikey est construite avec le
+vénérable algorithme MD4 (cf md4.py ci-joint) et que le
+secret est de longueur 16.
+
+Vous savez ce qu'il vous reste à faire !
+
+On ramasse un token en passant : RESOODGUAOPMMUIPSCPGPELC

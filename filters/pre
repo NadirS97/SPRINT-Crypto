@@ -1,0 +1,13 @@
+#!/usr/bin/env python3
+from filter import *
+
+map = {
+    b"<"[0]: b"&lt;",
+    b">"[0]: b"&gt;",
+    b"&"[0]: b"&amp;",
+    b"%"[0]: b"%%",
+}
+
+for l in binary_input:
+    for c in l:
+        binary_output.write(map.get(c, bytes([c])))

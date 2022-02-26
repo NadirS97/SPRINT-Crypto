@@ -1,0 +1,11 @@
+#!/usr/bin/env python3
+from filter import *
+
+log(f"Démarrage. Invoqué depuis { url }")
+
+alpha = 'ethsignlrfpxcaouwkydbvmqzj1378026594'
+phaal = '🍏🥦🥥🍎🍊🍉🍑🍈🍋🥑🥬🌽🌶🍅🥭🥒🧅🍐🍇🍓🥔🥝🍒🍆🧄🥕🦊🐶🐻🐼🦁🐯🐭🐱🐹🐰'
+cesar = str.maketrans(phaal, alpha)
+for line in input:
+    output.write(line.translate(cesar))
+log(f"Fin du traitement.")

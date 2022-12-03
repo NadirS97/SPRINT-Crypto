@@ -1,13 +1,17 @@
 # SPRINT-Crypto 
-## Projet de sprint de crypto fait en 32h M1-2021
+## Projet de sprint de crypto M1-2021
 
 #### Fait par : 
-- BEN JAZIA Aziz 
-- EL OUARIACHI Rachida
-- SAIAH Nadir
+- Aziz BEN JAZIA 
+- Rachida EL OUARIACHI
+- Nadir SAIAH
+
+#### Module : Cryptographie et sécurité 
+#### Professeur : Nicolas OLLINGER
+#### Année : Master 1 MIAGE - 2021
 -----------------------------------------------------------------------
 
-Une sorte de **CTF** avec plusieurs tokens à récupérer (un token étant une chaine de caractères composé de 14 alphabet en Majuscule)
+Une sorte de **CTF** avec plusieurs tokens à récupérer (un token étant sous la forme de chaînes composées de 24 lettres majuscules) en un temps limité, 32h en tout.
 
 -----------------------------------------------------------------------
 

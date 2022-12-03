@@ -1,5 +1,5 @@
 # SPRINT-Crypto 
-## Projet de sprint de crypto M1-2021
+## Projet sprint de crypto M1-2021
 
 #### Fait par : 
 - Aziz BEN JAZIA 
